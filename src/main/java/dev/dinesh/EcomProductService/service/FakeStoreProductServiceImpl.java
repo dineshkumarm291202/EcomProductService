@@ -12,14 +12,15 @@ public class FakeStoreProductServiceImpl implements ProductService{
     @Autowired
     private FakeStoreClient fakeStoreClient;
     @Override
-    public List<Product> getAllProducts() {
+    public List<FakeStoreProductResponseDTO> getAllProducts() {
          List<FakeStoreProductResponseDTO> fakeStoreProducts =fakeStoreClient.getAllProducts();
          return fakeStoreProducts;
     }
 
     @Override
-    public Product getProduct(int id) {
-        return null;
+    public FakeStoreProductResponseDTO getProduct(int id) {
+        FakeStoreProductResponseDTO product = fakeStoreClient.getProductById(id);
+        return product;
     }
 
     @Override
