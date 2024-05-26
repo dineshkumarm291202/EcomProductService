@@ -1,6 +1,7 @@
 package dev.dinesh.EcomProductService.service;
 
 import dev.dinesh.EcomProductService.DTO.FakeStoreProductResponseDTO;
+import dev.dinesh.EcomProductService.Exception.ProductNotFoundException;
 import dev.dinesh.EcomProductService.client.FakeStoreClient;
 import dev.dinesh.EcomProductService.entity.Product;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,8 +19,11 @@ public class FakeStoreProductServiceImpl implements ProductService{
     }
 
     @Override
-    public FakeStoreProductResponseDTO getProduct(int id) {
+    public FakeStoreProductResponseDTO getProduct(int id) throws ProductNotFoundException {
         FakeStoreProductResponseDTO product = fakeStoreClient.getProductById(id);
+        if(product==null){
+            throw new ProductNotFoundException("Product not found" +id);
+        }
         return product;
     }
 
